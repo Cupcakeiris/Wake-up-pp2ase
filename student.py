@@ -11,7 +11,7 @@ students = [[f"{f}a1.png", f"{f}a2.png", f"{f}a3.png"],
             [f"{f}k1.png", f"{f}k2.png", f"{f}k3.png"]]
 
 class Student(pygame.sprite.Sprite):
-    def __init__(self, x, y, id):
+    def __init__(self, x, y, id, a, b):
         # all necessary properties
         super().__init__()
         self.status = 'awake'
@@ -26,11 +26,11 @@ class Student(pygame.sprite.Sprite):
         self.w = 32
         self.h = 32
 
-        self.a = 9000
-        self.b = 27000
+        self.a = a
+        self.b = b
         self.energy_speed = randint(self.a, self.b) # each student has random speed of energy drain
         self.energy = 125 # max energy
-        self.next_time = 0
+        self.next_time = pygame.time.get_ticks()
         
     
     def energy_drain(self):
@@ -63,11 +63,11 @@ class Student(pygame.sprite.Sprite):
     
     # for userevent
     def change_speed(self):
-        if self.a > 0 and self.b > 3000:
+        if self.a > 0 and self.b > 0:
             self.a -= 3000
             self.b -= 3000
         self.energy_speed = randint(self.a, self.b)
-
+    
     def set_awake(self):
         self.image = pygame.image.load(students[self.i][0]) # [0] - awake, [1] - half-sleepy, [2] - asleep
     
