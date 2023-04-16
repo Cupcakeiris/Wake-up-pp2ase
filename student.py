@@ -51,7 +51,7 @@ class Student(pygame.sprite.Sprite):
             self.status = 'asleep'
 
     def click_event(self, m_x, m_y):
-        # reset student's energy when clicked at asleep status
+        # reset student's energy when clicked at 'asleep' status. make sure user clicked on top of sprite
         if (m_x <= (self.x + self.w) and m_y <= (self.y + self.h) and m_x >= (self.x - self.w) and m_y >= (self.y - self.h)) and self.status == 'asleep':
             self.energy = 125
             fx.play()

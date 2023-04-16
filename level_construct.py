@@ -3,8 +3,11 @@ from student import Student
 import random
 
 pygame.init()
+icon = pygame.image.load(r"assets/kelgenbayev/t1.png")
+pygame.display.set_icon(icon)
 
 def main(i, j, a, b, title):
+    # sound settings
     f = r"assets/mp3/"
     cool_songs = [f"{f}c418_lullaby.mp3", f"{f}c418_sweden.mp3", f"{f}c418_wet.mp3",
                 f"{f}evil_morty.mp3", f"{f}rick_roll.mp3", f"{f}undertale_shop.mp3", f"{f}jojo.mp3"]
@@ -16,6 +19,7 @@ def main(i, j, a, b, title):
     m = random.randint(0, len(cool_songs)-1)
     pygame.mixer.music.load(cool_songs[m])
     pygame.mixer.music.play(-1)
+
     # basic initialization
     bounds = (1280, 720)
     window = pygame.display.set_mode(bounds)
@@ -44,7 +48,7 @@ def main(i, j, a, b, title):
     student_sprites = pygame.sprite.Group()
     awake_set = set(()) # stores all awake and half-asleep student's ids
 
-    def teacher_idle(i):
+    def teacher_idle(i): # function that runs teacher's animation
         teacher = pygame.image.load(f"{f}t{i}.png")
         window.blit(teacher, (310, 164))
         
@@ -52,7 +56,7 @@ def main(i, j, a, b, title):
     for _ in range(i): # putting 24 student on left side
         for __ in range(j):
             temp = (temp[0] + 70, temp[1]) # student's every right neighbor is located 70px away
-            id = '0' + str(_) + str(__)
+            id = '0' + str(_) + str(__) # format of id: first half + row + column
             student_sprites.add(Student(temp[0], temp[1], int(id), a, b))
             awake_set.add(int(id))
             N += 1
@@ -67,14 +71,16 @@ def main(i, j, a, b, title):
             N += 1
         temp2 = (st2_x, temp2[1] + 80)
 
-
+    # for user event
     (mouse_x, mouse_y) = pygame.mouse.get_pos()
     inc_speed = pygame.USEREVENT + 1
     pygame.time.set_timer(inc_speed, 20000)
 
-    T = pygame.time.get_ticks() # pygame's time continues moving on from pygame.init()
-    next_frame = pygame.time.get_ticks()
+    T = pygame.time.get_ticks() # pygame's time continues moving on from pygame.init(), so to reset it we have to get it's current ellapsed time
+    next_frame = pygame.time.get_ticks() # for teacher's animation
+    
     while True:
+
         window.blit(grid, grid_rect)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -82,7 +88,7 @@ def main(i, j, a, b, title):
             if event.type == inc_speed:
                 for entity in student_sprites:
                     Student.change_speed(entity)
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: # reset energy of student with 'asleep' status
                 (mouse_x, mouse_y) = pygame.mouse.get_pos()
                 for entity in student_sprites:
                     Student.click_event(entity, mouse_x, mouse_y)
@@ -128,9 +134,12 @@ def main(i, j, a, b, title):
                 entity.energy = 125
                 entity.a = a
                 entity.b = b
+                entity.next_time = pygame.time.get_ticks()
             T = pygame.time.get_ticks() # we have to substract from moving on time the time we lost to restart from 0
             fx_fail.play()
             pygame.time.wait(3000)
+            pygame.mixer.music.load(cool_songs[m])
+            pygame.mixer.music.play(-1)
 
         # next level
         if time_ellapsed == 120:

@@ -3,7 +3,7 @@ import level_construct
 import time
 
 pygame.init()
-# opening display
+# basic settings
 WHITE = (255, 255, 255)
 window = pygame.display.set_mode((1280,720))
 window.fill(WHITE)
@@ -30,7 +30,7 @@ while True:
     if event.type == pygame.MOUSEBUTTONDOWN and photo_rect.collidepoint(event.pos):
          pygame.mixer.music.fadeout(500)
          time.sleep(0.5)
-         LEVEL = [{  # design of each level
+         LEVEL = [{  # design of each level, i - student row, j - student column, a - minimum speed, b - maximum speed
           "level": 1,
           "i": 4,
           "j": 6,
@@ -41,7 +41,7 @@ while True:
           "level": 2,
           "i": 2,
           "j": 6,
-          "a": 9000,
+          "a": 6000,
           "b": 21000,
           "title": 'midterm'
          }, {
