@@ -1,9 +1,21 @@
 import pygame
 from student import Student
+import random
 
 pygame.init()
 
 def main(i, j, a, b, title):
+    f = r"assets/mp3/"
+    cool_songs = [f"{f}c418_lullaby.mp3", f"{f}c418_sweden.mp3", f"{f}c418_wet.mp3",
+                f"{f}evil_morty.mp3", f"{f}rick_roll.mp3", f"{f}undertale_shop.mp3", f"{f}jojo.mp3"]
+    fx_fail = pygame.mixer.Sound(r"assets/mp3/fail.mp3")
+    fx_fail.set_volume(0.6)
+    fx_success = pygame.mixer.Sound(r"assets/mp3/success.mp3")
+    fx_success.set_volume(0.6)
+
+    m = random.randint(0, len(cool_songs)-1)
+    pygame.mixer.music.load(cool_songs[m])
+    pygame.mixer.music.play(-1)
     # basic initialization
     bounds = (1280, 720)
     window = pygame.display.set_mode(bounds)
@@ -12,12 +24,16 @@ def main(i, j, a, b, title):
     grid = pygame.image.load(r"assets/Bg.png")
     grid_rect = grid.get_rect()
     font = pygame.font.Font(r"assets/dogica.ttf", 18)
+    font_big = pygame.font.Font(r"assets/dogica.ttf", 60)
     lecture_failed = pygame.image.load(r"assets/fail.png")
     lecture_succeed = pygame.image.load(r"assets/succeed.png")
 
     f = r"assets/kelgenbayev/"
     t_frame = 1
     BLACK = (0,0,0)
+    RED = (220,20,60)
+    GREEN = (173,255,47)
+    WHITE = (255,255,255)
     N = 0 # total num of students
 
     (st_x, st_y) = (120, 340) # starting point of 1st student in 1st half
@@ -66,7 +82,6 @@ def main(i, j, a, b, title):
             if event.type == inc_speed:
                 for entity in student_sprites:
                     Student.change_speed(entity)
-                    print(entity.a, entity.b)
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 (mouse_x, mouse_y) = pygame.mouse.get_pos()
                 for entity in student_sprites:
@@ -100,21 +115,37 @@ def main(i, j, a, b, title):
         if N - len(awake_set) > N//2:
             window.fill((0,0,0))
             window.blit(lecture_failed, (0,0))
+            failed = font_big.render('LECTURE FAILED', True, RED)
+            info1 = font_big.render(f'level:{title}', True, WHITE)
+            info2 = font_big.render(f'time ellapsed:{time_ellapsed}', True, WHITE)
+            window.blit(failed, (10,30))
+            window.blit(info1, (10, 100))
+            window.blit(info2, (10, 180))
+            pygame.mixer.music.fadeout(3500)
+            m = (m+1)%len(cool_songs)
             pygame.display.update()
             for entity in student_sprites:
                 entity.energy = 125
                 entity.a = a
                 entity.b = b
             T = pygame.time.get_ticks() # we have to substract from moving on time the time we lost to restart from 0
+            fx_fail.play()
             pygame.time.wait(3000)
 
         # next level
-        if time_ellapsed == 40:
+        if time_ellapsed == 120:
             window.fill((0,0,0))
             window.blit(lecture_succeed, (0,0))
+            succeed = font_big.render('LECTURE SAVED', True, GREEN)
+            window.blit(succeed, (10,30))
+            window.blit(succeed, (10,100))
+            window.blit(succeed, (10,180))
             pygame.display.update()
+            fx_success.play()
             pygame.time.wait(3000)
             next_frame = pygame.time.get_ticks()
+            pygame.mixer.music.fadeout(3500)
+            m = (m+1)%len(cool_songs)
             return 0
 
         pygame.display.update()

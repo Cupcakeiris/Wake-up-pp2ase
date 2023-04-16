@@ -2,7 +2,8 @@ import pygame
 from random import randint
 pygame.init()
 
-fx = pygame.mixer.Sound(r"assets/fx.mp3")
+fx = pygame.mixer.Sound(r"assets/mp3/blip.mp3")
+fx.set_volume(0.5)
 f = r"assets/students/"
 students = [[f"{f}a1.png", f"{f}a2.png", f"{f}a3.png"],
             [f"{f}b1.png", f"{f}b2.png", f"{f}b3.png"],
