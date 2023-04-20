@@ -1,10 +1,18 @@
 import pygame
 from student import Student
 import random
+import sys, os
 
 pygame.init()
 icon = pygame.image.load(r"assets/kelgenbayev/t1.png")
 pygame.display.set_icon(icon)
+
+# to build exe file
+def resource_path(relative):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative)
+    return os.path.join(relative)
+
 
 def main(i, j, a, b, title):
     # sound settings

@@ -1,6 +1,11 @@
-import pygame, sys
+import pygame, sys, os
 import level_construct
 import time
+
+def resource_path(relative):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative)
+    return os.path.join(relative)
 
 pygame.init()
 # basic settings
@@ -54,11 +59,11 @@ while True:
          }
          ]
 
-         lv1 = level_construct.main(LEVEL[0]["i"], LEVEL[0]["j"], LEVEL[0]["a"], LEVEL[0]["b"], LEVEL[0]["title"])
+         lv1 = level_construct.main(LEVEL[0]["i"], LEVEL[0]["j"], LEVEL[0]["a"], LEVEL[0]["b"], LEVEL[0]["title"]) # lv = 0
          time.sleep(3)
-         lv2 = level_construct.main(LEVEL[1]["i"], LEVEL[1]["j"], LEVEL[1]["a"], LEVEL[1]["b"], LEVEL[1]["title"])
+         lv2 = level_construct.main(LEVEL[1]["i"], LEVEL[1]["j"], LEVEL[1]["a"], LEVEL[1]["b"], LEVEL[1]["title"]) # lv = 0
          time.sleep(3)
-         lv3 = level_construct.main(LEVEL[2]["i"], LEVEL[2]["j"], LEVEL[2]["a"], LEVEL[2]["b"], LEVEL[2]["title"])
+         lv3 = level_construct.main(LEVEL[2]["i"], LEVEL[2]["j"], LEVEL[2]["a"], LEVEL[2]["b"], LEVEL[2]["title"]) # lv = 0
          window.blit(end, (0,0))
     pygame.display.update()
 
