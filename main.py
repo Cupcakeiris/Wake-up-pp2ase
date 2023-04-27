@@ -14,12 +14,13 @@ window = pygame.display.set_mode((1280,720))
 window.fill(WHITE)
 pygame.display.set_caption("Wake up, pp2ease!")
 
-pygame.mixer.music.load(r"assets/mp3/lullaby.mp3")
+f = 'C:/KBTU/2nd semester/Wake_Up_Pp2ease/'
+pygame.mixer.music.load(f"{f}assets/mp3/lullaby.mp3")
 pygame.mixer.music.play(-1)
 
-button = pygame.image.load(f"assets/button.png")
-bg = pygame.image.load(f"assets/menu.png")
-end = pygame.image.load(f"assets/thank_u.png")
+button = pygame.image.load(f"{f}assets/button.png")
+bg = pygame.image.load(f"{f}assets/menu.png")
+end = pygame.image.load(f"{f}assets/thank_u.png")
 photo_rect = button.get_rect()
 photo_rect.center = (1280 // 2, 720 // 3)
 

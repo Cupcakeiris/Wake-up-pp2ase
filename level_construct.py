@@ -4,19 +4,14 @@ import random
 import sys, os
 
 pygame.init()
-icon = pygame.image.load(r"assets/kelgenbayev/t1.png")
+ff = 'C:/KBTU/2nd semester/Wake_Up_Pp2ease/'
+icon = pygame.image.load(f"{ff}assets/kelgenbayev/t1.png")
 pygame.display.set_icon(icon)
-
-# to build exe file
-def resource_path(relative):
-    if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, relative)
-    return os.path.join(relative)
 
 
 def main(i, j, a, b, title):
     # sound settings
-    f = r"assets/mp3/"
+    f = r"C:/KBTU/2nd semester/Wake_Up_Pp2ease/assets/mp3/"
     cool_songs = [f"{f}c418_lullaby.mp3", f"{f}c418_sweden.mp3", f"{f}c418_wet.mp3",
                 f"{f}evil_morty.mp3", f"{f}rick_roll.mp3", f"{f}undertale_shop.mp3", f"{f}jojo.mp3"]
     fx_fail = pygame.mixer.Sound(r"assets/mp3/fail.mp3")
@@ -33,14 +28,14 @@ def main(i, j, a, b, title):
     window = pygame.display.set_mode(bounds)
     pygame.display.set_caption(f"Wake up, pp2ease! It's {title}!")
     clock = pygame.time.Clock()
-    grid = pygame.image.load(r"assets/Bg.png")
+    grid = pygame.image.load(f"{ff}assets/Bg.png")
     grid_rect = grid.get_rect()
-    font = pygame.font.Font(r"assets/dogica.ttf", 18)
-    font_big = pygame.font.Font(r"assets/dogica.ttf", 60)
-    lecture_failed = pygame.image.load(r"assets/fail.png")
-    lecture_succeed = pygame.image.load(r"assets/succeed.png")
+    font = pygame.font.Font(f"{ff}assets/dogica.ttf", 18)
+    font_big = pygame.font.Font(f"{ff}assets/dogica.ttf", 60)
+    lecture_failed = pygame.image.load(f"{ff}assets/fail.png")
+    lecture_succeed = pygame.image.load(f"{ff}assets/succeed.png")
 
-    f = r"assets/kelgenbayev/"
+    f = r"C:/KBTU/2nd semester/Wake_Up_Pp2ease/assets/kelgenbayev/"
     t_frame = 1
     BLACK = (0,0,0)
     RED = (220,20,60)
