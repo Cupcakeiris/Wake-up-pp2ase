@@ -1,11 +1,8 @@
-import pygame, sys, os
+import pygame, sys
 import level_construct
 import time
-
-def resource_path(relative):
-    if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, relative)
-    return os.path.join(relative)
+import pathlib
+path = pathlib.Path(__file__).parent.resolve()
 
 pygame.init()
 # basic settings
@@ -14,13 +11,12 @@ window = pygame.display.set_mode((1280,720))
 window.fill(WHITE)
 pygame.display.set_caption("Wake up, pp2ease!")
 
-f = 'C:/KBTU/2nd semester/Wake_Up_Pp2ease/'
-pygame.mixer.music.load(f"{f}assets/mp3/lullaby.mp3")
+pygame.mixer.music.load(f"{path}\\assets\\mp3\\lullaby.mp3")
 pygame.mixer.music.play(-1)
 
-button = pygame.image.load(f"{f}assets/button.png")
-bg = pygame.image.load(f"{f}assets/menu.png")
-end = pygame.image.load(f"{f}assets/thank_u.png")
+button = pygame.image.load(f"{path}\\assets\\button.png")
+bg = pygame.image.load(f"{path}\\assets\\menu.png")
+end = pygame.image.load(f"{path}\\assets\\thank_u.png")
 photo_rect = button.get_rect()
 photo_rect.center = (1280 // 2, 720 // 3)
 
@@ -40,22 +36,22 @@ while True:
           "level": 1,
           "i": 4,
           "j": 6,
-          "a": 9000,
-          "b": 27000,
+          "a": 15000,
+          "b": 33000,
           "title": 'week 1'
          }, {
           "level": 2,
           "i": 2,
           "j": 6,
-          "a": 6000,
-          "b": 21000,
+          "a": 12000,
+          "b": 27000,
           "title": 'midterm'
          }, {
           "level": 3,
           "i": 1,
           "j": 6,
-          "a": 6000,
-          "b": 12000,
+          "a": 9000,
+          "b": 18000,
           "title": 'endterm'
          }
          ]

@@ -2,9 +2,12 @@ import pygame
 from random import randint
 pygame.init()
 
-fx = pygame.mixer.Sound(r"C:/KBTU/2nd semester/Wake_Up_Pp2ease/assets/mp3/blip.mp3")
+import pathlib
+path = pathlib.Path(__file__).parent.resolve()
+
+fx = pygame.mixer.Sound(f"{path}\\assets\\mp3\\blip.mp3")
 fx.set_volume(0.5)
-f = r"C:/KBTU/2nd semester/Wake_Up_Pp2ease/assets/students/"
+f = f"{path}\\assets\students\\"
 students = [[f"{f}a1.png", f"{f}a2.png", f"{f}a3.png"],
             [f"{f}b1.png", f"{f}b2.png", f"{f}b3.png"],
             [f"{f}c1.png", f"{f}c2.png", f"{f}c3.png"],

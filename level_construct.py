@@ -1,22 +1,23 @@
 import pygame
 from student import Student
 import random
-import sys, os
+
+import pathlib
+path = pathlib.Path(__file__).parent.resolve()
 
 pygame.init()
-ff = 'C:/KBTU/2nd semester/Wake_Up_Pp2ease/'
-icon = pygame.image.load(f"{ff}assets/kelgenbayev/t1.png")
+icon = pygame.image.load(f"{path}\\assets\\kelgenbayev\\t1.png")
 pygame.display.set_icon(icon)
 
 
 def main(i, j, a, b, title):
     # sound settings
-    f = r"C:/KBTU/2nd semester/Wake_Up_Pp2ease/assets/mp3/"
+    f = f"{path}\\assets\\mp3\\"
     cool_songs = [f"{f}c418_lullaby.mp3", f"{f}c418_sweden.mp3", f"{f}c418_wet.mp3",
                 f"{f}evil_morty.mp3", f"{f}rick_roll.mp3", f"{f}undertale_shop.mp3", f"{f}jojo.mp3"]
-    fx_fail = pygame.mixer.Sound(r"assets/mp3/fail.mp3")
+    fx_fail = pygame.mixer.Sound(f"{f}fail.mp3")
     fx_fail.set_volume(0.6)
-    fx_success = pygame.mixer.Sound(r"assets/mp3/success.mp3")
+    fx_success = pygame.mixer.Sound(f"{f}success.mp3")
     fx_success.set_volume(0.6)
 
     m = random.randint(0, len(cool_songs)-1)
@@ -28,14 +29,14 @@ def main(i, j, a, b, title):
     window = pygame.display.set_mode(bounds)
     pygame.display.set_caption(f"Wake up, pp2ease! It's {title}!")
     clock = pygame.time.Clock()
-    grid = pygame.image.load(f"{ff}assets/Bg.png")
+    grid = pygame.image.load(f"{path}\\assets\\Bg.png")
     grid_rect = grid.get_rect()
-    font = pygame.font.Font(f"{ff}assets/dogica.ttf", 18)
-    font_big = pygame.font.Font(f"{ff}assets/dogica.ttf", 60)
-    lecture_failed = pygame.image.load(f"{ff}assets/fail.png")
-    lecture_succeed = pygame.image.load(f"{ff}assets/succeed.png")
+    font = pygame.font.Font(f"{path}\\assets\\dogica.ttf", 18)
+    font_big = pygame.font.Font(f"{path}\\assets\\dogica.ttf", 60)
+    lecture_failed = pygame.image.load(f"{path}\\assets\\fail.png")
+    lecture_succeed = pygame.image.load(f"{path}\\assets\\succeed.png")
 
-    f = r"C:/KBTU/2nd semester/Wake_Up_Pp2ease/assets/kelgenbayev/"
+    f = f"{path}\\assets\\kelgenbayev\\"
     t_frame = 1
     BLACK = (0,0,0)
     RED = (220,20,60)
